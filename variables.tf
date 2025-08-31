@@ -106,12 +106,8 @@ variable "rds_allocated_storage" {
   type        = number
   description = "RDS allocated storage in GB"
 }
-variable "private_subnets" {
-  description = "List of private subnet IDs for RDS"
-  type        = list(string)
-}
 
-variable "vpc_id" {
-  description = "VPC ID where resources will be created"
+variable "my_home_ip" {
+  description = "Your home IP in CIDR notation"
   type        = string
 }

@@ -19,6 +19,7 @@ module "security_groups" {
   vpc_id       = module.vpc.vpc_id
   project_name = var.vpc_name
   allowed_ips  = var.allowed_ips
+  my_home_ip   = var.my_home_ip
 }
 
 module "iam" {
@@ -89,5 +90,5 @@ module "rds" {
   instance_type          = var.rds_instance_type
   allocated_storage      = var.rds_allocated_storage
   vpc_security_group_ids = [module.security_groups.rds_sg_id]
-  subnet_ids             = var.private_subnets
+  subnet_ids             = module.vpc.private_subnet_ids
 }
