@@ -1,0 +1,117 @@
+# Root variables
+
+variable "aws_region" {
+  description = "AWS region to deploy resources"
+  type        = string
+  default     = "eu-west-2"
+}
+variable "vpc_name" {
+  description = "Name of the vpc"
+  type        = string
+  default     = "ecs-umami"
+}
+
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "azs" {
+  description = "Availability zones"
+  type        = list(string)
+  default     = ["eu-west-2a", "eu-west-2b", ]
+}
+
+variable "public_subnet_cidrs" {
+  description = "CIDRs for public subnets"
+  type        = list(string)
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+variable "private_subnet_cidrs" {
+  description = "CIDRs for private subnets"
+  type        = list(string)
+  default     = ["10.0.101.0/24", "10.0.102.0/24"]
+}
+
+variable "allowed_ips" {
+  description = "List of CIDR blocks allowed to access the application (for ALB and ECS)"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "ecs_execution_role_name" {
+  description = "Name of the ECS execution role"
+  type        = string
+  default     = "ecs_execution_role"
+}
+
+variable "certificate_arn" {
+  description = "ACM certificate ARN (optional)"
+  type        = string
+}
+variable "acm_domain_name" {
+  description = "Domain name for ACM certificate (optional)"
+  type        = string
+  default     = ""
+}
+variable "acm_sans" {
+  description = "Subject alternative names for ACM certificate (optional)"
+  type        = list(string)
+  default     = []
+}
+
+variable "route53_zone_id" {
+  description = "Hosted zone ID for Route 53 (optional)"
+  type        = string
+  default     = ""
+}
+variable "container_name" {
+  type        = string
+  description = "Name of the container"
+}
+
+variable "container_image" {
+  type        = string
+  description = "Container image URI"
+}
+
+variable "container_port" {
+  type        = number
+  description = "Port the container listens on"
+}
+variable "rds_db_name" {
+  type        = string
+  description = "Name of the RDS database"
+}
+
+variable "rds_username" {
+  type        = string
+  description = "RDS master username"
+}
+
+variable "rds_password" {
+  type        = string
+  description = "RDS master password"
+  sensitive   = true
+}
+
+variable "rds_instance_type" {
+  type        = string
+  description = "RDS instance type"
+}
+
+variable "rds_allocated_storage" {
+  type        = number
+  description = "RDS allocated storage in GB"
+}
+variable "private_subnets" {
+  description = "List of private subnet IDs for RDS"
+  type        = list(string)
+}
+
+variable "vpc_id" {
+  description = "VPC ID where resources will be created"
+  type        = string
+}
