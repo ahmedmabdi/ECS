@@ -20,7 +20,7 @@ variable "alb_sg_id" {
 
 variable "certificate_arn" {
   type        = string
-  description = "Optional ACM certificate ARN for HTTPS"
+  description = "ACM certificate ARN for HTTPS"
   default     = ""
 }
 

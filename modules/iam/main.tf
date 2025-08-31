@@ -41,42 +41,4 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_logs" {
   role       = aws_iam_role.ecs_execution_role.name
   policy_arn = aws_iam_policy.ecs_cloudwatch_logging.arn
 }
-resource "aws_iam_policy" "terraform_acm_route53" {
-  name        = "terraform-acm-route53-policy"
-  description = "Policy for ACM certificate creation and Route53 DNS validation"
-  policy      = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect: "Allow",
-        Action: [
-          "acm:RequestCertificate",
-          "acm:DescribeCertificate",
-          "acm:ListCertificates",
-          "acm:DeleteCertificate",
-          "acm:AddTagsToCertificate",
-          "acm:ListTagsForCertificate",
-          "acm:RenewCertificate",
-          "acm:UpdateCertificateOptions",
-          "acm:GetCertificate"
-        ],
-        Resource: "*"
-      },
-      {
-        Effect: "Allow",
-        Action: [
-          "route53:ListHostedZones",
-          "route53:GetChange",
-          "route53:ChangeResourceRecordSets",
-          "route53:ListResourceRecordSets"
-        ],
-        Resource: "*"
-      }
-    ]
-  })
-}
 
-resource "aws_iam_role_policy_attachment" "terraform_acm_route53_attach" {
-  role       = aws_iam_role.ecs_execution_role.name
-  policy_arn = aws_iam_policy.terraform_acm_route53.arn
-}
