@@ -33,12 +33,13 @@ resource "aws_ecs_task_definition" "this" {
           hostPort      = var.container_port
           protocol      = "tcp"
         }
-      ]
+      ],
+      "essential": true
 
       environment = [
   {
     name  = "DATABASE_URL"
-    value = "postgresql://umami_user:StrongPass123!@umami.c3ii8mmu80tw.eu-west-2.rds.amazonaws.com:5432/postgres"
+    value = var.database_url
   }
 ]
       logConfiguration = {

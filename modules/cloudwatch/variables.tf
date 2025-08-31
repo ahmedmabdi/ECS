@@ -1,10 +1,10 @@
 variable "project_name" {
-  description = "Name of the ECS project"
+  description = "name of the ECS project"
   type        = string
 }
 
 variable "environment" {
-  description = "Environment name (dev, staging, prod)"
+  description = "environemnt name (dev, staging, prod)"
   type        = string
 }
 

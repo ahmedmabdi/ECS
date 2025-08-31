@@ -90,3 +90,8 @@ variable "region" {
   type        = string
 }
 
+variable "database_url" {
+  description = "The DATABASE_URL for ECS"
+  type        = string
+  sensitive   = true
+}
