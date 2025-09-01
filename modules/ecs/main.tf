@@ -1,8 +1,10 @@
+# CloudWatch Log Group for ECS
 resource "aws_cloudwatch_log_group" "ecs" {
   name              = "/ecs/${var.cluster_name}"
   retention_in_days = 7
 }
 
+# ECS Cluster
 resource "aws_ecs_cluster" "this" {
   name = var.cluster_name
 
@@ -12,6 +14,7 @@ resource "aws_ecs_cluster" "this" {
   }
 }
 
+# ECS Task Definition
 resource "aws_ecs_task_definition" "this" {
   family                   = var.task_family
   requires_compatibilities = ["FARGATE"]
@@ -33,15 +36,15 @@ resource "aws_ecs_task_definition" "this" {
           hostPort      = var.container_port
           protocol      = "tcp"
         }
-      ],
-      "essential": true
+      ]
 
       environment = [
-  {
-    name  = "DATABASE_URL"
-    value = local.database_url
-  }
-]
+        {
+          name  = "DATABASE_URL"
+          value = "postgresql://${var.rds_username}:${var.rds_password}@${var.rds_endpoint}:${var.rds_port}/${var.rds_db_name}"
+        }
+      ]
+
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -54,6 +57,7 @@ resource "aws_ecs_task_definition" "this" {
   ])
 }
 
+# ECS Service
 resource "aws_ecs_service" "this" {
   name            = var.service_name
   cluster         = aws_ecs_cluster.this.id
@@ -74,6 +78,7 @@ resource "aws_ecs_service" "this" {
   }
 }
 
+# Auto-scaling Target
 resource "aws_appautoscaling_target" "ecs" {
   max_capacity       = var.max_count
   min_capacity       = var.min_count
@@ -82,6 +87,7 @@ resource "aws_appautoscaling_target" "ecs" {
   service_namespace  = "ecs"
 }
 
+# Auto-scaling Policy for CPU
 resource "aws_appautoscaling_policy" "ecs_cpu" {
   name               = "${var.service_name}-cpu-scaling"
   policy_type        = "TargetTrackingScaling"

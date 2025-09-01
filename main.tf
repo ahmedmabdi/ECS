@@ -19,7 +19,7 @@ module "security_groups" {
   vpc_id       = module.vpc.vpc_id
   project_name = var.vpc_name
   allowed_ips  = var.allowed_ips
-  my_home_ip   = var.my_home_ip
+  home_ip      = var.home_ip
 }
 
 module "iam" {
@@ -52,6 +52,13 @@ module "ecs" {
   task_memory = "512"
 
   region = var.aws_region
+
+  # RDS info
+  rds_username = var.rds_username
+  rds_password = var.rds_password
+  rds_db_name  = var.rds_db_name
+  rds_endpoint = module.rds.db_endpoint
+  rds_port     = module.rds.db_port
 }
 module "alb" {
   source            = "./modules/alb"

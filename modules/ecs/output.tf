@@ -13,7 +13,3 @@ output "task_definition_arn" {
 output "cluster_name" {
   value = aws_ecs_cluster.this.name
 }
-output "database_url" {
-  value     = local.database_url
-  sensitive = true
-}

@@ -107,7 +107,6 @@ variable "rds_allocated_storage" {
   description = "RDS allocated storage in GB"
 }
 
-variable "my_home_ip" {
-  description = "Your home IP in CIDR notation"
-  type        = string
+variable "home_ip" {
+  type = string
 }
