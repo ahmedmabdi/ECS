@@ -1,7 +1,9 @@
 output "db_endpoint" {
-  value = aws_db_instance.umami_db.address
+  description = "RDS endpoint"
+  value       = aws_db_instance.umami_db.address
 }
 
 output "db_port" {
-  value = aws_db_instance.umami_db.port
+  description = "RDS port"
+  value       = aws_db_instance.umami_db.port
 }

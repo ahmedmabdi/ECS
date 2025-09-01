@@ -39,7 +39,7 @@ resource "aws_ecs_task_definition" "this" {
       environment = [
   {
     name  = "DATABASE_URL"
-    value = var.database_url
+    value = local.database_url
   }
 ]
       logConfiguration = {

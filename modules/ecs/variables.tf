@@ -94,4 +94,30 @@ variable "database_url" {
   description = "The DATABASE_URL for ECS"
   type        = string
   sensitive   = true
+  default = "value"
+}
+variable "rds_username" {
+  description = "RDS username for the database"
+  type        = string
+}
+
+variable "rds_password" {
+  description = "RDS password for the database"
+  type        = string
+  sensitive   = true
+}
+
+variable "rds_db_name" {
+  description = "RDS database name"
+  type        = string
+}
+
+variable "db_endpoint" {
+  description = "RDS endpoint"
+  type        = string
+}
+
+variable "db_port" {
+  description = "RDS port"
+  type        = number
 }

@@ -21,7 +21,6 @@ variable "alb_sg_id" {
 variable "certificate_arn" {
   type        = string
   description = "acm certificate arn for HTTPS"
-  default     = ""
 }
 
 variable "health_check_path" {
@@ -32,4 +31,9 @@ variable "health_check_path" {
 variable "target_port" {
   type        = number
   description = "port the alb will forward to"
+}
+variable "certificate_validation_ref" {
+  description = "Reference to ACM certificate validation resource"
+  type        = any
+  default     = null
 }

@@ -1,26 +1,26 @@
-variable "db_name" {
+variable "rds_db_name" {
   description = "The name of the Postgres database to create."
   type        = string
-  default = "umami"
+  default     = "umami"
 }
 
-variable "username" {
+variable "rds_username" {
   description = "The master username for the Postgres database."
   type        = string
 }
 
-variable "password" {
+variable "rds_password" {
   description = "The master password for the Postgres database."
   type        = string
   sensitive   = true
 }
 
-variable "instance_type" {
+variable "rds_instance_type" {
   description = "The instance type of the RDS database."
   type        = string
 }
 
-variable "allocated_storage" {
+variable "rds_allocated_storage" {
   description = "The allocated storage size for the RDS instance in GB."
   type        = number
   default     = 20
@@ -35,15 +35,8 @@ variable "subnet_ids" {
   type        = list(string)
   description = "Private subnets for RDS"
 }
-
-variable "publicly_accessible" {
-  description = "Boolean flag to indicate if the RDS instance should be publicly accessible."
-  type        = bool
-  default     = false
-}
-
 variable "engine_version" {
   description = "Postgres engine version for the RDS instance."
   type        = string
-  default     = "15.3"
+  default     = "17.4"  # match your existing RDS
 }

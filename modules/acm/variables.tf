@@ -1,14 +1,14 @@
 variable "domain_name" {
   type    = string
-  default = ""
+  default = "ahmedumami.click"
 }
 
 variable "subject_alternative_names" {
   type    = list(string)
-  default = []
+  default = ["www.ahmedumami.click"]
 }
 
 variable "route53_zone_id" {
   type    = string
-  default = ""
+  default = "Z103935430WUS287YMWJ6"
 }
