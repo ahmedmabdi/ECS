@@ -39,11 +39,11 @@ resource "aws_ecs_task_definition" "this" {
       ]
 
       environment = [
-        {
-          name  = "DATABASE_URL"
-          value = "postgresql://${var.rds_username}:${var.rds_password}@${var.rds_endpoint}:${var.rds_port}/${var.rds_db_name}"
-        }
-      ]
+  {
+    name  = "DATABASE_URL"
+    value = "postgres://umami_user:StrongPass123!@umami.c3ii8mmu80tw.eu-west-2.rds.amazonaws.com:5432/umami"
+  }
+]
 
       logConfiguration = {
         logDriver = "awslogs"
@@ -56,7 +56,6 @@ resource "aws_ecs_task_definition" "this" {
     }
   ])
 }
-
 # ECS Service
 resource "aws_ecs_service" "this" {
   name            = var.service_name
@@ -67,7 +66,7 @@ resource "aws_ecs_service" "this" {
 
   network_configuration {
     subnets          = var.private_subnets
-    security_groups  = var.security_groups
+    security_groups = [var.ecs_sg_id]
     assign_public_ip = false
   }
 
@@ -75,6 +74,8 @@ resource "aws_ecs_service" "this" {
     target_group_arn = var.target_group_arn
     container_name   = var.container_name
     container_port   = var.container_port
+
+   
   }
 }
 

@@ -13,3 +13,7 @@ output "task_definition_arn" {
 output "cluster_name" {
   value = aws_ecs_cluster.this.name
 }
+output "ecs_sg_id" {
+  value       = var.ecs_sg_id
+  description = "ID of the ECS security group passed from SG module"
+}

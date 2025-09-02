@@ -1,4 +1,4 @@
-# Name of the database
+## Name of the database
 variable "db_name" {
   description = "The name of the Postgres database to create."
   type        = string

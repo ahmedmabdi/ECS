@@ -3,6 +3,9 @@ variable "cluster_name" {
   type        = string
   default     = "ecs-umami"
 }
+variable "vpc_id" {
+  type        = string
+}
 
 variable "task_family" {
   description = "ECS task family name"
@@ -19,11 +22,6 @@ variable "task_memory" {
   description = "Memory for the ECS task (MB)"
   type        = string
   default     = "512"
-}
-
-variable "execution_role_arn" {
-  description = "IAM execution role ARN for ECS tasks"
-  type        = string
 }
 
 variable "task_role_arn" {
@@ -75,10 +73,6 @@ variable "private_subnets" {
   type        = list(string)
 }
 
-variable "security_groups" {
-  description = "Security group IDs for ECS tasks"
-  type        = list(string)
-}
 
 variable "target_group_arn" {
   description = "Target group ARN for ECS service load balancing"
@@ -114,4 +108,21 @@ variable "rds_port" {
   description = "RDS port number"
   type        = number
   default     = 5432
+}
+variable "execution_role_arn" {
+  description = "ARN of the ECS execution role"
+  type        = string
+}
+
+variable "ecs_task_role_arn" {
+  description = "ARN of the ECS task role"
+  type        = string
+}
+variable "ecs_sg_id" {
+  description = "ECS Security Group ID"
+  type        = string
+}
+variable "security_groups" {
+  description = "List of security group IDs to attach to ECS tasks"
+  type        = list(string)
 }
