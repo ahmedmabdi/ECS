@@ -7,7 +7,7 @@
 .terraform/
 .terraform.lock.hcl
 *.tfvars
-
+*.tfstate.lock.info
 # Node
 node_modules/
 .env

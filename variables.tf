@@ -47,10 +47,7 @@ variable "ecs_execution_role_name" {
   default     = "ecs_execution_role"
 }
 
-variable "certificate_arn" {
-  description = "ACM certificate ARN (optional)"
-  type        = string
-}
+
 variable "acm_domain_name" {
   description = "Domain name for ACM certificate (optional)"
   type        = string
@@ -81,32 +78,23 @@ variable "container_port" {
   type        = number
   description = "Port the container listens on"
 }
-variable "rds_db_name" {
-  type        = string
-  description = "Name of the RDS database"
-}
 
-variable "rds_username" {
-  type        = string
-  description = "RDS master username"
-}
-
-variable "rds_password" {
-  type        = string
-  description = "RDS master password"
-  sensitive   = true
-}
-
-variable "rds_instance_type" {
-  type        = string
-  description = "RDS instance type"
-}
-
-variable "rds_allocated_storage" {
-  type        = number
-  description = "RDS allocated storage in GB"
-}
-
-variable "home_ip" {
+variable "rds_db_name"           { default = "umami" }
+variable "rds_username"          { default = "umami_user" }
+variable "rds_password"          { default = "StrongPass123!" }
+variable "rds_instance_type"     { default = "db.t3.micro" }
+variable "rds_allocated_storage" { default = 20 }
+variable "home_ip"               { default = "82.18.254.202/32" }
+variable "project" {
   type = string
+  default = "umami"
+}
+variable "project_name" {
+  type        = string
+  description = "Project name prefix for resources"
+  default = "umami"
+}
+variable "bastion_key_name" {
+  description = "Key pair name for SSH access to Bastion"
+  type        = string
 }
