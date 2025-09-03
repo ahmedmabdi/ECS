@@ -79,12 +79,39 @@ variable "container_port" {
   description = "Port the container listens on"
 }
 
-variable "rds_db_name"           { default = "umami" }
-variable "rds_username"          { default = "umami_user" }
-variable "rds_password"          { default = "StrongPass123!" }
-variable "rds_instance_type"     { default = "db.t3.micro" }
-variable "rds_allocated_storage" { default = 20 }
-variable "home_ip"               { default = "82.18.254.202/32" }
+variable "rds_db_name" {
+  description = "The name of the RDS database"
+  type        = string
+}
+
+variable "rds_username" {
+  description = "RDS master username"
+  type        = string
+}
+
+variable "rds_password" {
+  description = "RDS master password"
+  type        = string
+  sensitive   = true
+}
+
+variable "rds_instance_type" {
+  description = "RDS instance type"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "rds_allocated_storage" {
+  description = "RDS allocated storage in GB"
+  type        = number
+  default     = 20
+}
+
+variable "home_ip" {
+  description = "Your home IP for security group"
+  type        = string
+  default     = "82.18.254.202/32"
+}
 variable "project" {
   type = string
   default = "umami"
@@ -93,8 +120,4 @@ variable "project_name" {
   type        = string
   description = "Project name prefix for resources"
   default = "umami"
-}
-variable "bastion_key_name" {
-  description = "Key pair name for SSH access to Bastion"
-  type        = string
 }

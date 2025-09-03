@@ -23,10 +23,9 @@ module "sg" {
 
 module "iam" {
   source                      = "./modules/iam"
-  ecs_task_execution_role_name = "ecsExecutionRoleDemo"  # or aws_iam_role.ecs_execution_role.name
-  ecs_task_role_name           = "ecsTaskRoleDemo"       # or aws_iam_role.ecs_task_role.name
+  ecs_task_execution_role_name = "ecsExecutionRoleDemo"  
+  ecs_task_role_name           = "ecsTaskRoleDemo"       
 }
-
 module "ecs" {
   source = "./modules/ecs"
 
@@ -56,11 +55,10 @@ module "ecs" {
   vpc_id = module.vpc.vpc_id
   region = var.aws_region
 
-  # RDS connection
   rds_username = var.rds_username
   rds_password = var.rds_password
   rds_db_name  = var.rds_db_name
-  rds_endpoint = module.rds.db_address
+  rds_address = module.rds.db_address
   rds_port     = module.rds.db_port
   depends_on = [ 
     module.vpc,
@@ -106,14 +104,4 @@ module "rds" {
   allocated_storage      = var.rds_allocated_storage
   vpc_security_group_ids = [module.sg.rds_sg_id]
   subnet_ids             = module.vpc.private_subnet_ids
-}
-module "bastion" {
-  source           = "./modules/bastion"
-  instance_type    = "t3.micro"
-  key_pair_name    = var.bastion_key_name
-  public_subnet_id = module.vpc.public_subnet_ids[0]
-  bastion_sg_id    = module.sg.bastion_sg_id  # ✅ use the output
-  project_name     = var.project_name
-  vpc_id           = module.vpc.vpc_id
-  home_ip          = var.home_ip
 }
