@@ -56,3 +56,8 @@ variable "engine_version" {
   type        = string
   default     = "15.3"
 }
+variable "db_identifier" {
+  description = "RDS instance identifier"
+  type        = string
+  default     = "umami-db"
+}

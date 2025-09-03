@@ -1,5 +1,6 @@
 resource "aws_db_instance" "umami_db" {
-  identifier            = var.db_name
+  identifier               = var.db_identifier  # RDS instance name
+  db_name                 = var.db_name
   engine                = "postgres"
   instance_class        = var.instance_type
   allocated_storage     = var.allocated_storage
@@ -13,6 +14,7 @@ resource "aws_db_instance" "umami_db" {
 
   depends_on = [aws_db_subnet_group.this]
 }
+
 
 resource "aws_db_subnet_group" "this" {
   name       = "${var.db_name}-subnet-group"

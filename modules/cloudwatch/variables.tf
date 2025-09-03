@@ -9,17 +9,17 @@ variable "environment" {
 }
 
 variable "aws_region" {
-  description = "AWS region"
+  description =  "region"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-west-2"
 }
 variable "cluster_name" {
-  description = "Name of the ECS cluster to monitor"
+  description = "name of the ECS cluster to monitor"
   type        = string
 }
 
 variable "service_name" {
-  description = "Name of the ECS service to monitor"
+  description = "name of the ECS service to monitor"
   type        = string
 }
 

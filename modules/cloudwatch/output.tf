@@ -1,4 +1,4 @@
 output "cloudwatch_log_group_name" {
-  description = "CloudWatch Log Group Name"
+  description = "log group name cloudwatch"
   value       = aws_cloudwatch_log_group.ecs.name
 }

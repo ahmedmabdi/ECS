@@ -1,6 +1,4 @@
-#############################
-# ALB
-#############################
+
 resource "aws_lb" "this" {
   name               = var.name
   internal           = false
@@ -15,9 +13,6 @@ resource "aws_lb" "this" {
   }
 }
 
-#############################
-# Target Group
-#############################
 resource "aws_lb_target_group" "this" {
   name        = "${var.name}-tg"
   port        = var.target_port
@@ -39,9 +34,6 @@ resource "aws_lb_target_group" "this" {
   }
 }
 
-#############################
-# HTTP Listener → redirect to HTTPS
-#############################
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.this.arn
   port              = 80
@@ -57,15 +49,12 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-#############################
-# HTTPS Listener → serve the application
-#############################
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.this.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = var.certificate_arn  # <--- use the variable
+  certificate_arn   = var.certificate_arn  
 
   default_action {
     type             = "forward"

@@ -1,11 +1,12 @@
 output "db_address" {
-  value = aws_db_instance.umami_db.address
+  description = "The endpoint address of the RDS instance"
+  value       = aws_db_instance.umami_db.endpoint
 }
 
-output "db_port" {
-  value = aws_db_instance.umami_db.port
-}
 
 output "db_identifier" {
   value = aws_db_instance.umami_db.identifier
+}
+output "db_port" {
+  value = tonumber(aws_db_instance.umami_db.port)
 }

@@ -1,10 +1,10 @@
-# CloudWatch Log Group for ECS
+
 resource "aws_cloudwatch_log_group" "ecs" {
   name              = "/ecs/${var.cluster_name}"
   retention_in_days = 7
 }
 
-# ECS Cluster
+
 resource "aws_ecs_cluster" "this" {
   name = var.cluster_name
 
@@ -14,7 +14,7 @@ resource "aws_ecs_cluster" "this" {
   }
 }
 
-# ECS Task Definition
+
 resource "aws_ecs_task_definition" "this" {
   family                   = var.task_family
   requires_compatibilities = ["FARGATE"]
@@ -40,8 +40,8 @@ resource "aws_ecs_task_definition" "this" {
 
       environment = [
   {
-    name  = "DATABASE_URL"
-    value = "postgres://umami_user:StrongPass123!@umami.c3ii8mmu80tw.eu-west-2.rds.amazonaws.com:5432/umami"
+    name = "DATABASE_URL"
+    value = "postgres://${urlencode(var.rds_username)}:${urlencode(var.rds_password)}@${var.rds_address}/${var.rds_db_name}"
   }
 ]
 
@@ -56,7 +56,7 @@ resource "aws_ecs_task_definition" "this" {
     }
   ])
 }
-# ECS Service
+
 resource "aws_ecs_service" "this" {
   name            = var.service_name
   cluster         = aws_ecs_cluster.this.id
@@ -79,7 +79,7 @@ resource "aws_ecs_service" "this" {
   }
 }
 
-# Auto-scaling Target
+
 resource "aws_appautoscaling_target" "ecs" {
   max_capacity       = var.max_count
   min_capacity       = var.min_count
@@ -88,7 +88,7 @@ resource "aws_appautoscaling_target" "ecs" {
   service_namespace  = "ecs"
 }
 
-# Auto-scaling Policy for CPU
+
 resource "aws_appautoscaling_policy" "ecs_cpu" {
   name               = "${var.service_name}-cpu-scaling"
   policy_type        = "TargetTrackingScaling"
