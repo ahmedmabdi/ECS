@@ -18,10 +18,16 @@ ARG BASE_PATH
 
 ENV DATABASE_TYPE=$DATABASE_TYPE
 ENV BASE_PATH=$BASE_PATH
-
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN pnpm add prisma@6.7.0
+
+# Provide a dummy DATABASE_URL for prisma generate
+ENV DATABASE_URL="file:./dev.db"
+
+# Generate Prisma client before building the app
 RUN npx prisma generate
+
 
 # Use CI/CD-friendly build when DATABASE_TYPE is not provided
 ARG DATABASE_TYPE
