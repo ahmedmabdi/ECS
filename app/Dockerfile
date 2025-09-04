@@ -20,22 +20,9 @@ ENV DATABASE_TYPE=$DATABASE_TYPE
 ENV BASE_PATH=$BASE_PATH
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Always generate Prisma client safely
-# Provide temporary SQLite DB for CI builds
-RUN if [ -z "$DATABASE_TYPE" ]; then \
-      echo "CI build: using dummy Prisma client"; \
-      touch prisma/dev.db; \
-      npx prisma generate || echo "Skipped prisma generate"; \
-    else \
-      npx prisma generate; \
-    fi
+RUN echo "Skipping prisma generate at build-time"
+RUN npm run build-docker-ci || echo "Skipped build-docker-ci"
 
-# Build Next.js app
-RUN if [ -z "$DATABASE_TYPE" ]; then \
-      npm run build-docker-ci; \
-    else \
-      npm run build-docker; \
-    fi
 # Production image, copy all the files and run next
 FROM node:22-alpine AS runner
 WORKDIR /app
