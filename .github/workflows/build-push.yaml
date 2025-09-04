@@ -31,9 +31,12 @@ jobs:
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
+          scan-type: image
           image-ref: $ECR_REPOSITORY:$IMAGE_TAG
           format: table
-          severity-threshold: HIGH
+          severity-threshold: CRITICAL
+          exit-code: 1
+          ignore-unfixed: true
 
       - name: Tag and push Docker image to ECR
         run: |
