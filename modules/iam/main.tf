@@ -10,7 +10,6 @@ resource "aws_iam_role" "ecs_execution_role" {
   })
 }
 
-# ECS task role
 resource "aws_iam_role" "ecs_task_role" {
   name = "ecsTaskRole"
   assume_role_policy = jsonencode({
