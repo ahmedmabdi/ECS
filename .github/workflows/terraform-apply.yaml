@@ -6,6 +6,7 @@ on:
       env:
         ECR_REPOSITORY: umami
         IMAGE_TAG: latest
+        AWS_REGION: ${{ secrets.REGION }}
 
 jobs:
   terraform-apply:
@@ -33,6 +34,6 @@ jobs:
         run: |
           terraform plan \
             -out=tfplan \
-            -var="container_image=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}"
+            -var="container_image=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}"
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
