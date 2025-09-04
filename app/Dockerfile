@@ -22,10 +22,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 # Provide a temporary SQLite DATABASE_URL for prisma generate
 ENV DATABASE_URL="file:./dev.db"
-
-# Only generate Prisma client if DATABASE_TYPE is defined, otherwise skip
-RUN if [ -n "$DATABASE_TYPE" ]; then npx prisma generate || echo "Skipping prisma generate in CI build"; fi
-
+RUN if [ -n "$DATABASE_TYPE" ]; then \
+      npx prisma generate; \
+    else \
+      echo "CI build, generating dummy Prisma client"; \
+      npx prisma generate || echo "Skipped prisma generate"; \
+    fi
 # Use CI/CD-friendly build when DATABASE_TYPE is not provided
 RUN if [ -z "$DATABASE_TYPE" ]; then npm run build-docker-ci; else npm run build-docker; fi
 
