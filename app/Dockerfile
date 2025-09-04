@@ -20,11 +20,11 @@ ENV DATABASE_TYPE=$DATABASE_TYPE
 ENV BASE_PATH=$BASE_PATH
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Provide a dummy DATABASE_URL so prisma generate works in Docker
+# Provide a temporary SQLite DATABASE_URL for prisma generate
 ENV DATABASE_URL="file:./dev.db"
 
-# Generate Prisma client (don't need to pnpm add prisma again if it's in package.json)
-RUN npx prisma generate
+# Only generate Prisma client if DATABASE_TYPE is defined, otherwise skip
+RUN if [ -n "$DATABASE_TYPE" ]; then npx prisma generate || echo "Skipping prisma generate in CI build"; fi
 
 # Use CI/CD-friendly build when DATABASE_TYPE is not provided
 RUN if [ -z "$DATABASE_TYPE" ]; then npm run build-docker-ci; else npm run build-docker; fi
