@@ -21,7 +21,9 @@ ENV BASE_PATH=$BASE_PATH
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN npm run build-docker
+# Use CI/CD-friendly build when DATABASE_TYPE is not provided
+ARG DATABASE_TYPE
+RUN if [ -z "$DATABASE_TYPE" ]; then npm run build-docker-ci; else npm run build-docker; fi
 
 # Production image, copy all the files and run next
 FROM node:22-alpine AS runner
