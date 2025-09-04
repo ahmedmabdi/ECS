@@ -39,6 +39,7 @@ module "ecs" {
 
   execution_role_arn = module.iam.ecs_execution_role_arn
   ecs_task_role_arn  = module.iam.ecs_task_role_arn
+  database_url_arn = module.ssm.database_url_arn
 
   private_subnets    = module.vpc.private_subnet_ids
   security_groups    = [module.sg.ecs_sg_id]
@@ -104,4 +105,12 @@ module "rds" {
   allocated_storage      = var.rds_allocated_storage
   vpc_security_group_ids = [module.sg.rds_sg_id]
   subnet_ids             = module.vpc.private_subnet_ids
+}
+module "ssm" {
+  source       = "./modules/ssm"
+  
+  rds_username = var.rds_username
+  rds_password = var.rds_password
+  rds_address  = module.rds.db_address
+  rds_db_name  = var.rds_db_name
 }

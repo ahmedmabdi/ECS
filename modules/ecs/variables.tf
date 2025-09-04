@@ -126,3 +126,6 @@ variable "security_groups" {
   description = "List of security group IDs to attach to ECS tasks"
   type        = list(string)
 }
+variable "database_url_arn" {
+  type = string
+}

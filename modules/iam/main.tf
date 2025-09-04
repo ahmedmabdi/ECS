@@ -52,16 +52,22 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_logs" {
   policy_arn = aws_iam_policy.ecs_cloudwatch_logging.arn
 }
 
-resource "aws_iam_role" "ecs_task" {
-  name               = "${var.ecs_task_role_name}"
-  assume_role_policy = jsonencode({
+resource "aws_iam_policy" "ecs_task_ssm_access" {
+  name        = "ecs-task-ssm-access"
+  description = "Allows ECS task to read secrets from SSM Parameter Store"
+  policy      = jsonencode({
     Version = "2012-10-17",
     Statement = [{
-      Effect = "Allow",
-      Principal = {
-        Service = "ecs-tasks.amazonaws.com"
-      },
-      Action = "sts:AssumeRole"
+      Effect   = "Allow",
+      Action   = ["ssm:GetParameter", "ssm:GetParameters", "ssm:GetParametersByPath"],
+      Resource = "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/umami/*"
     }]
   })
 }
+
+resource "aws_iam_role_policy_attachment" "ecs_execution_ssm_attach" {
+  role       = aws_iam_role.ecs_execution_role.name
+  policy_arn = aws_iam_policy.ecs_task_ssm_access.arn
+}
+
+data "aws_caller_identity" "current" {}

@@ -38,12 +38,12 @@ resource "aws_ecs_task_definition" "this" {
         }
       ]
 
-      environment = [
-  {
-    name = "DATABASE_URL"
-    value = "postgres://${urlencode(var.rds_username)}:${urlencode(var.rds_password)}@${var.rds_address}/${var.rds_db_name}"
-  }
-]
+      secrets = [
+      {
+        name      = "DATABASE_URL"
+        valueFrom = var.database_url_arn  # ARN of SSM SecureString parameter
+      }
+    ]
 
       logConfiguration = {
         logDriver = "awslogs"
