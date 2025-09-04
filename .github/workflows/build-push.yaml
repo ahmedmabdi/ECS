@@ -32,9 +32,9 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
-          image-ref: $ECR_REPOSITORY:$IMAGE_TAG
+          image-ref: ${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           format: table
-          severity-threshold: CRITICAL
+          severity: CRITICAL
           exit-code: 1
           ignore-unfixed: true
 
