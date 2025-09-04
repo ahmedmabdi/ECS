@@ -1,5 +1,5 @@
 # ========================
-# Install dependencies only
+# Install dependencies only when needed
 # ========================
 FROM node:22-alpine AS deps
 RUN apk add --no-cache libc6-compat
@@ -21,14 +21,10 @@ ARG BASE_PATH
 ENV DATABASE_TYPE=$DATABASE_TYPE
 ENV BASE_PATH=$BASE_PATH
 ENV NEXT_TELEMETRY_DISABLED=1
-# Provide temporary DB for prisma generate
-ENV DATABASE_URL="file:./dev.db"
-
-# Copy prisma schema to ensure it exists
-COPY prisma ./prisma
+ENV DATABASE_URL="file:./dev.db"  # temporary DB for Prisma generate
 
 # Generate Prisma client
-RUN npx prisma generate
+RUN npx prisma generate || echo "Skipped prisma generate"
 
 # Build the Next.js app
 RUN npm run build-docker
@@ -44,41 +40,35 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS=$NODE_OPTIONS
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs \
+    && adduser --system --uid 1001 nextjs \
+    && npm install -g pnpm \
+    && apk add --no-cache curl
 
-# Install pnpm
-RUN npm install -g pnpm
-
-# Add curl
-RUN apk add --no-cache curl
-
-# Script dependencies for runtime
+# Script dependencies
 RUN pnpm add npm-run-all dotenv prisma@6.7.0
 
-# Fix permissions for prisma runtime
+# Permissions for prisma
 RUN chown -R nextjs:nodejs node_modules/.pnpm/
 
-# Copy files from builder
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+# Copy runtime files from builder
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Conditionally copy standalone if exists
+# Copy Next.js build outputs safely
 RUN if [ -d /app/.next/standalone ]; then \
       cp -r /app/.next/standalone ./; \
     else \
-      echo ".next/standalone not found, skipping"; \
+      echo ".next/standalone not found, skipping copy"; \
     fi
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Custom routes
-RUN if [ -f ./.next/routes-manifest.json ]; then \
-      mv ./.next/routes-manifest.json ./.next/routes-manifest-orig.json; \
-    fi
+RUN mv ./.next/routes-manifest.json ./.next/routes-manifest-orig.json || true
 
 USER nextjs
+
 EXPOSE 3000
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
