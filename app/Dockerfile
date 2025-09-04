@@ -1,4 +1,3 @@
-# Install dependencies only when needed
 FROM node:22-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
@@ -18,17 +17,16 @@ ARG BASE_PATH
 
 ENV DATABASE_TYPE=$DATABASE_TYPE
 ENV BASE_PATH=$BASE_PATH
+
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN echo "Skipping prisma generate at build-time"
-RUN npm run build-docker-ci || echo "Skipped build-docker-ci"
+RUN npm run build-docker
 
 # Production image, copy all the files and run next
 FROM node:22-alpine AS runner
 WORKDIR /app
 
 ARG NODE_OPTIONS
-
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS=$NODE_OPTIONS
@@ -52,15 +50,9 @@ COPY --from=builder /app/scripts ./scripts
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-# Copy .next/standalone only if it exists
-RUN if [ -d /app/.next/standalone ]; then \
-      cp -r /app/.next/standalone ./; \
-    else \
-      echo ".next/standalone not found, skipping copy"; \
-    fi
-
-# Copy .next/static normally
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
 # Custom routes
 RUN mv ./.next/routes-manifest.json ./.next/routes-manifest-orig.json
 
