@@ -6,7 +6,7 @@ on:
       env:
         ECR_REPOSITORY: umami
         IMAGE_TAG: latest
-        AWS_REGION: ${{ secrets.REGION }}
+        AWS_REGION: eu-west-2
 
 jobs:
   terraform-apply:
