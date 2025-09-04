@@ -1,0 +1,41 @@
+name: Build, Scan & Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: ${{ secrets.REGION }}
+  ECR_REPOSITORY: umami
+  IMAGE_TAG: latest 
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.REGION }}
+
+      - name: Build Docker image
+        run: docker buildx build --platform linux/amd64 -t $ECR_REPOSITORY:$IMAGE_TAG .
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@v1
+        with:
+          image-ref: $ECR_REPOSITORY:$IMAGE_TAG
+          format: table
+          severity-threshold: HIGH
+
+      - name: Tag and push Docker image to ECR
+        run: |
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
