@@ -20,17 +20,13 @@ ENV DATABASE_TYPE=$DATABASE_TYPE
 ENV BASE_PATH=$BASE_PATH
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN pnpm add prisma@6.7.0
-
-# Provide a dummy DATABASE_URL for prisma generate
+# Provide a dummy DATABASE_URL so prisma generate works in Docker
 ENV DATABASE_URL="file:./dev.db"
 
-# Generate Prisma client before building the app
+# Generate Prisma client (don't need to pnpm add prisma again if it's in package.json)
 RUN npx prisma generate
 
-
 # Use CI/CD-friendly build when DATABASE_TYPE is not provided
-ARG DATABASE_TYPE
 RUN if [ -z "$DATABASE_TYPE" ]; then npm run build-docker-ci; else npm run build-docker; fi
 
 # Production image, copy all the files and run next
