@@ -21,6 +21,8 @@ ENV BASE_PATH=$BASE_PATH
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN npx prisma generate
+
 # Use CI/CD-friendly build when DATABASE_TYPE is not provided
 ARG DATABASE_TYPE
 RUN if [ -z "$DATABASE_TYPE" ]; then npm run build-docker-ci; else npm run build-docker; fi
