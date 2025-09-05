@@ -4,17 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       ecr_repository:
-        description: 'ECR repository name'
         required: true
         default: 'umami'
       image_tag:
-        description: 'Image tag'
         required: true
         default: 'latest'
-      aws_region:
-        description: 'AWS region'
-        required: true
-        default: 'eu-west-2'
+     
 
 jobs:
   terraform-apply:
@@ -56,4 +51,4 @@ jobs:
         run: terraform plan
 
       - name: Terraform Apply
-        run: terraform apply 
+        run: terraform apply -auto-approve
