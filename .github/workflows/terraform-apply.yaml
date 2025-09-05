@@ -45,7 +45,7 @@ jobs:
         run: echo "Container image = $TF_VAR_container_image"
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply 
