@@ -31,9 +31,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: |
-          terraform plan \
-            -out=tfplan \
-            -var="container_image=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}"
-      - name: Terraform Apply
+        run: terraform plan -out=tfplan
+        env:
+          TF_VAR_container_image: "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }}"- name: Terraform Apply
         run: terraform apply -auto-approve tfplan
