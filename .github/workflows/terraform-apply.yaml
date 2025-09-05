@@ -20,10 +20,7 @@ jobs:
   terraform-apply:
     runs-on: ubuntu-latest
     env:
-      ECR_REPOSITORY: ${{ github.event.inputs.ecr_repository }}
-      IMAGE_TAG: ${{ github.event.inputs.image_tag }}
-      AWS_REGION: ${{ github.event.inputs.aws_region }}
-      TF_VAR_container_image: "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ github.event.inputs.aws_region }}.amazonaws.com/${{ github.event.inputs.ecr_repository }}:${{ github.event.inputs.image_tag }}"
+      TF_VAR_container_image: "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/umami:latest"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
