@@ -1,10 +1,8 @@
 variable "project_name" {
-  description = "name of the ECS project"
   type        = string
 }
 
 variable "environment" {
-  description = "environemnt name (dev, staging, prod)"
   type        = string
 }
 
@@ -14,12 +12,10 @@ variable "aws_region" {
   default     = "eu-west-2"
 }
 variable "cluster_name" {
-  description = "name of the ECS cluster to monitor"
   type        = string
 }
 
 variable "service_name" {
-  description = "name of the ECS service to monitor"
   type        = string
 }
 

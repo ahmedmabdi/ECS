@@ -15,5 +15,4 @@ output "cluster_name" {
 }
 output "ecs_sg_id" {
   value       = var.ecs_sg_id
-  description = "ID of the ECS security group passed from SG module"
 }

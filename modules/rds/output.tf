@@ -1,5 +1,4 @@
 output "db_address" {
-  description = "The endpoint address of the RDS instance"
   value       = aws_db_instance.umami_db.endpoint
 }
 
