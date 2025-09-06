@@ -1,4 +1,4 @@
 # ECS Project
-(ECS/images/build-push.png)
-(ECS/images/apply.png)
-(ECS/images/destroy.png)
+![Build & Push](images/build-push.png)
+![Terraform Apply](images/apply.png)
+![Terraform Destroy](images/destroy.png)
