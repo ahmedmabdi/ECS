@@ -9,7 +9,7 @@
 *.tfvars
 *.tfstate.lock.info
 tfplan
-
+index.html
 
 
 # Node
