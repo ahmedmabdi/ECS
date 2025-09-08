@@ -1,5 +1,5 @@
 resource "aws_db_instance" "umami_db" {
-  identifier               = var.db_identifier  # RDS instance name
+  identifier               = var.db_identifier  
   db_name                 = var.db_name
   engine                = "postgres"
   instance_class        = var.instance_type
