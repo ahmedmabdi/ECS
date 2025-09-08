@@ -17,6 +17,30 @@ This project demonstrates a full cloud deployment of **Umami Analytics** on AWS 
 
 > **Cost-Optimized**: Minimal resources suitable for demos while maintaining functionality.
 
+ECS-Umami/
+├─ .github/
+│  └─ workflows/
+├─ app/
+├─ images-recordings/
+├─ terraform/
+│  ├─ main.tf
+│  ├─ backend.tf
+│  ├─ outputs.tf
+│  ├─ providers.tf
+│  ├─ variables.tf
+│  └─ modules/
+│     ├─ acm/
+│     ├─ alb/
+│     ├─ cloudwatch/
+│     ├─ ecs/
+│     ├─ iam/
+│     ├─ rds/
+│     ├─ route53/
+│     ├─ sg/
+│     ├─ ssm/
+│     └─ vpc/
+├─ .gitignore
+└─ README.md
 ---
 ## Architecture Diagram
 ![Architecture Diagram](images-recordings/awsdiagram.png)  
