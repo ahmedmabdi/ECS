@@ -53,20 +53,6 @@ This project demonstrates a full cloud deployment of **Umami Analytics** on AWS 
 ![Umami Demo](images-recordings/umami-demo.png)  
 ![Umami Demo GIF](images-recordings/umami-demo.gif)  
 
-
-## Future Improvements
-
-To make this project production-ready, the following enhancements can be considered:
-
-- **Security & Protection**
-  - AWS WAF for protection against common web attacks
-  - Enhanced security hardening with Security Hub, GuardDuty, and IAM least-privilege reviews
-  - Secrets Manager for more secure and scalable secret management
-
-- **High Availability & Resilience**
-  - Multiple NAT Gateways for fault tolerance
-  - Multi-AZ RDS for failover and resilience
-
 ---
 
 ## CI/CD workflows
