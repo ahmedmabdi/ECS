@@ -6,7 +6,7 @@ analytics platform, leveraging AWS ECS Fargate, Terraform, and Docker.
 ---
 ## Project Overview
 
-This project demonstrates a full cloud deployment of **Umami Analytics** on AWS using **Terraform, Docker, and ECS Fargate**, with a cost-optimized setup for demos:
+This project demonstrates a full cloud deployment of **Umami** on AWS using **Terraform, Docker, and ECS Fargate**, with a cost-optimized setup for demos:
 
 - **Infrastructure as Code**: Terraform provisions VPC and contents, IAM roles, RDS, ECS, ACM, SSM and Cloudwatch.
 - **Containerized Deployment**: Docker images stored in ECR, deployed on ECS Fargate with ALB and auto-scaling.
