@@ -4,7 +4,7 @@ A fully containerized analytics application deployed on AWS using modern infrast
 
 ---
 ## Architecture Diagram
-![Architecture Diagram](images-recordings/Aws-arch-diagram.png)  
+![Architecture Diagram](images-recordings/diagram.png)  
 The architecture consists of the following key components:
 
 - **VPC** with public and private subnets across 2 AZ's
