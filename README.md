@@ -1,7 +1,62 @@
-# ECS Project
-![Diagram](images-recordings/Aws-arch-diagram.png)
-![Umami Demo](images-recordings/umami-demo.png)
-![Umami Demo](images-recordings/umami-demo.gif)
-![Build & Push](images-recordings/build-push.png)
-![Terraform Apply](images-recordings/apply.png)
+# ECS Project: Umami Analytics App
+
+A fully containerized analytics application deployed on AWS using modern infrastructure-as-code, CI/CD pipelines, and container orchestration. This project demonstrates a cost-optimized setup for running **Umami**, an open-source web analytics platform, leveraging AWS ECS Fargate, Terraform, and Docker.
+
+---
+
+## Project Overview
+
+This project demonstrates a full cloud deployment of **Umami Analytics** on AWS using **Terraform, Docker, and ECS Fargate**, with a cost-optimized setup for demos:
+
+- **Infrastructure as Code**: Terraform provisions VPC, subnets, security groups, IAM roles, and RDS.
+- **Containerized Deployment**: Docker images stored in ECR, deployed on ECS Fargate with ALB and auto-scaling.
+- **CI/CD**: Automated build, push, and deployment integrated into Terraform workflows.
+- **Monitoring & Security**: CloudWatch for logs/metrics, SSM for secrets, ACM for SSL.
+- **Networking & DNS**: Route 53 routing, single NAT Gateway, and single-AZ RDS for cost efficiency.
+- **State Management**: S3 + DynamoDB for Terraform state locking.
+
+> ⚡ **Cost-Optimized**: Minimal resources suitable for demos while maintaining functionality.
+
+## Demo 
+
+![Umami Demo](images-recordings/umami-demo.png)  
+![Umami Demo GIF](images-recordings/umami-demo.gif)  
+
+## Architecture Diagram
+![Architecture Diagram](images-recordings/Aws-arch-diagram.png)  
+The architecture consists of the following key components:
+
+- **VPC** with public and private subnets across 2 AZ's
+- **Application Load Balancer (ALB)** for routing
+- **ECS Fargate Cluster** running Umami containers with **auto-scaling**
+- **Amazon RDS** (PostgreSQL) in single AZ
+- **ECR** for Docker image storage
+- **Route 53** for DNS management
+- **ACM** for SSL certificates
+- **CloudWatch** for logging and monitoring
+- **IAM Roles & Policies** for secure access
+- **SSM Parameter Store** for secrets
+- **S3 + DynamoDB** for Terraform state
+
+> ⚡ **Cost Optimization**: Single NAT Gateway, single-AZ RDS, minimal resource footprint suitable for demo environments.
+
+---
+## Future Improvements
+
+To make this project production-ready, the following enhancements can be considered:
+
+- **Security & Protection**
+  - AWS WAF for protection against common web attacks
+  - Enhanced security hardening with Security Hub, GuardDuty, and IAM least-privilege reviews
+  - Secrets Manager for more secure and scalable secret management
+
+- **High Availability & Resilience**
+  - Multiple NAT Gateways for fault tolerance
+  - Multi-AZ RDS for failover and resilience
+
+---
+
+## CI/CD workflows
+![Build & Push](images-recordings/build-push.png)  
+![Terraform Apply](images-recordings/apply.png)  
 ![Terraform Destroy](images-recordings/destroy.png)
