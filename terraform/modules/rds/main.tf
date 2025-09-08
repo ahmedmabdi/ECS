@@ -18,7 +18,7 @@ resource "aws_db_instance" "umami_db" {
 
 resource "aws_db_subnet_group" "this" {
   name       = "${var.db_name}-subnet-group"
-  subnet_ids = var.subnet_ids  # pass in both private subnets
+  subnet_ids = var.subnet_ids  
   tags = {
     Name = "${var.db_name}-subnet-group"
   }
