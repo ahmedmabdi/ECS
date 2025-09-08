@@ -21,6 +21,19 @@ The architecture consists of the following key components:
 
 > **Cost Optimization**: Single NAT Gateway, single-AZ RDS, minimal resource footprint suitable for demo environments.
 
+## Future Improvements
+
+To make this project production-ready, the following enhancements can be considered:
+
+- **Security & Protection**
+  - AWS WAF for protection against common web attacks
+  - Enhanced security hardening with Security Hub, GuardDuty, and IAM least-privilege reviews
+  - Secrets Manager for more secure and scalable secret management
+
+- **High Availability & Resilience**
+  - Add NAT Gateway in AZ2 for fault tolerance
+  - Enable Multi-AZ RDS for failover and resilience
+
 ---
 ## Project Overview
 
