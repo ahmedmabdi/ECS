@@ -48,6 +48,7 @@ To make this project production-ready, the following enhancements can be conside
 - **High Availability & Resilience**
   - Add NAT Gateway in AZ2 for fault tolerance
   - Enable Multi-AZ RDS for failover and resilience
+  - Use Aurora over RDS for high performance, scalability and better durability
 
 ---
 ## Demo 
