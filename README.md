@@ -59,6 +59,9 @@ To make this project production-ready, the following enhancements can be conside
 ---
 
 ## CI/CD workflows
+- **Build and Push**
 ![Build & Push](images-recordings/build-push.png)  
+- **Terraform Plan and Apply**
 ![Terraform Apply](images-recordings/apply.png)  
+- **Terraform Destroy**
 ![Terraform Destroy](images-recordings/destroy.png)
