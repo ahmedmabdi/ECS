@@ -4,11 +4,11 @@ A fully containerized analytics application deployed on AWS using modern infrast
 
 ---
 ## Architecture Diagram
-![Architecture Diagram](images-recordings/diagram.png)  
+![Architecture Diagram](images-recordings/awsdiagram.png)  
 The architecture consists of the following key components:
 
 - **VPC** with public and private subnets across 2 AZ's
-- **Application Load Balancer (ALB)** for routing
+- **Single Application Load Balancer (ALB)** deployed across 2 AZ's for routing
 - **ECS Fargate Cluster** running Umami containers with **auto-scaling**
 - **Amazon RDS** (PostgreSQL) in single AZ
 - **ECR** for Docker image storage
