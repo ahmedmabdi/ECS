@@ -42,7 +42,7 @@ To make this project production-ready, the following enhancements can be conside
 
 - **Security & Protection**
   - AWS WAF for protection against common web attacks
-  - Enhanced security hardening with Security Hub, GuardDuty, and IAM least-privilege reviews
+  - Enhanced security hardening with Security Hub and GuardDuty
   - Secrets Manager for more secure and scalable secret management
 
 - **High Availability & Resilience**
