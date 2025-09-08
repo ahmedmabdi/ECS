@@ -14,7 +14,3 @@ variable "allowed_ips" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
 }
-variable "home_ip" {
-  description = "Your home/public IP for RDS access"
-  type        = string
-}

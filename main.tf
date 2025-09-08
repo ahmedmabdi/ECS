@@ -17,7 +17,6 @@ module "vpc" {
 module "sg" {
   source       = "./modules/sg"
   vpc_id       = module.vpc.vpc_id
-  home_ip      = var.home_ip
   project_name = var.project_name
 }
 

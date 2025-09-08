@@ -88,10 +88,7 @@ variable "rds_allocated_storage" {
   default     = 20
 }
 
-variable "home_ip" {
-  type        = string
-  default     = "82.18.254.202/32"
-}
+
 variable "project" {
   type = string
   default = "umami"
