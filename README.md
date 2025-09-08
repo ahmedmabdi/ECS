@@ -3,25 +3,6 @@
 A fully containerized analytics application deployed on AWS using modern infrastructure-as-code, CI/CD pipelines, and container orchestration. This project demonstrates a cost-optimized setup for running **Umami**, an open-source web analytics platform, leveraging AWS ECS Fargate, Terraform, and Docker.
 
 ---
-
-## Project Overview
-
-This project demonstrates a full cloud deployment of **Umami Analytics** on AWS using **Terraform, Docker, and ECS Fargate**, with a cost-optimized setup for demos:
-
-- **Infrastructure as Code**: Terraform provisions VPC, subnets, security groups, IAM roles, and RDS.
-- **Containerized Deployment**: Docker images stored in ECR, deployed on ECS Fargate with ALB and auto-scaling.
-- **CI/CD**: Automated build, push, and deployment integrated into Terraform workflows.
-- **Monitoring & Security**: CloudWatch for logs/metrics, SSM for secrets, ACM for SSL.
-- **Networking & DNS**: Route 53 routing, single NAT Gateway, and single-AZ RDS for cost efficiency.
-- **State Management**: S3 + DynamoDB for Terraform state locking.
-
-> **Cost-Optimized**: Minimal resources suitable for demos while maintaining functionality.
-
-## Demo 
-
-![Umami Demo](images-recordings/umami-demo.png)  
-![Umami Demo GIF](images-recordings/umami-demo.gif)  
-
 ## Architecture Diagram
 ![Architecture Diagram](images-recordings/Aws-arch-diagram.png)  
 The architecture consists of the following key components:
@@ -41,6 +22,25 @@ The architecture consists of the following key components:
 > **Cost Optimization**: Single NAT Gateway, single-AZ RDS, minimal resource footprint suitable for demo environments.
 
 ---
+## Project Overview
+
+This project demonstrates a full cloud deployment of **Umami Analytics** on AWS using **Terraform, Docker, and ECS Fargate**, with a cost-optimized setup for demos:
+
+- **Infrastructure as Code**: Terraform provisions VPC, subnets, security groups, IAM roles, and RDS.
+- **Containerized Deployment**: Docker images stored in ECR, deployed on ECS Fargate with ALB and auto-scaling.
+- **CI/CD**: Automated build, push, and deployment integrated into Terraform workflows.
+- **Monitoring & Security**: CloudWatch for logs/metrics, SSM for secrets, ACM for SSL.
+- **Networking & DNS**: Route 53 routing, single NAT Gateway, and single-AZ RDS for cost efficiency.
+- **State Management**: S3 + DynamoDB for Terraform state locking.
+
+> **Cost-Optimized**: Minimal resources suitable for demos while maintaining functionality.
+
+## Demo 
+
+![Umami Demo](images-recordings/umami-demo.png)  
+![Umami Demo GIF](images-recordings/umami-demo.gif)  
+
+
 ## Future Improvements
 
 To make this project production-ready, the following enhancements can be considered:
