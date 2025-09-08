@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "this" {
       secrets = [
       {
         name      = "DATABASE_URL"
-        valueFrom = var.database_url_arn  # ARN of SSM SecureString parameter
+        valueFrom = var.database_url_arn 
       }
     ]
 
