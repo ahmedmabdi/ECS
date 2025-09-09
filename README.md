@@ -16,7 +16,7 @@ This project demonstrates a full cloud deployment of **Umami** on AWS using **Te
 - **Networking & DNS**: Route 53 routing, single NAT Gateway, and single-AZ RDS for cost efficiency.
 - **State Management**: S3 + DynamoDB for Terraform state locking.
 
-> **Cost-Optimized**: Minimal resources suitable for demos while maintaining functionality.
+> **Cost-Optimised**: Minimal resources suitable for demos while maintaining functionality.
 
 ---
 ## Architecture Diagram
@@ -35,7 +35,7 @@ The architecture consists of the following key components:
 - **SSM Parameter Store** for secrets
 - **S3 + DynamoDB** for Terraform state
 
-> **Cost Optimization**: Single NAT Gateway, single-AZ RDS, minimal resource footprint suitable for demo environments.
+> **Cost Optimisation**: Single NAT Gateway, single-AZ RDS, minimal resource footprint suitable for demo environments.
 
 ## Future Improvements
 
