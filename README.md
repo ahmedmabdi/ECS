@@ -10,7 +10,7 @@ This project demonstrates a full cloud deployment of **Umami** on AWS using **Te
 
 - **Infrastructure as Code**: Terraform provisions VPC and contents, IAM roles, RDS, ECS, ACM, SSM and Cloudwatch.
 - **Database**: An **Amazon RDS (PostgreSQL)** instance is deployed to serve as the backend database for Umami, ensuring persistent, managed, and scalable storage.
-- **Containerized Deployment**: Docker images stored in ECR, deployed on ECS Fargate with ALB and auto-scaling.
+- **Containerised Deployment**: Docker images stored in ECR, deployed on ECS Fargate with ALB and auto-scaling.
 - **CI/CD**: Automated build, push, and deployment integrated into Terraform workflows.
 - **Monitoring & Security**: CloudWatch for logs/metrics, SSM for secrets, ACM for SSL.
 - **Networking & DNS**: Route 53 routing, single NAT Gateway, and single-AZ RDS for cost efficiency.
