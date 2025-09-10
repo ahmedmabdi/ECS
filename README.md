@@ -65,12 +65,12 @@ To make this project production-ready, the following enhancements can be conside
 
 During initial deployment, the ECS task logs showed the following error when the application could not connect to the Postgres database:  
 
-**```bash
-01 September 2025 at 08:32
+**
+"01 September 2025 at 08:32
 ✗ Unable to connect to the database: Database umami does not exist
 umami
 01 September 2025 at 08:32
-✓ DATABASE_URL is defined.**
+✓ DATABASE_URL is defined."**
 
 After revisiting the RDS resource several times, I discovered the issue was was caused because the identifier variable was set using var.db_name (umami).
 - identifier            = var.db_name
