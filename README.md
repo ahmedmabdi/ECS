@@ -4,6 +4,9 @@ A fully containerised analytics application deployed on AWS using modern infrast
 analytics platform, leveraging AWS ECS Fargate, Terraform, and Docker.
 
 ---
+## Why Use ECS?
+Umami was deployed on Amazon ECS Fargate because it provides a seamless way of running the application as a containerised service without managing servers. It allows you to focus on the application and not the infrastructure, whilst still benefiting from secure networking, load balancing and automatic scaling across multiple availibility zones, preventing failures from impacting application. Since Umami is a lightwieght anaylytics tool that needs to be readily available but doesn't need to constantly consume large amounts of compute, ECS provides the correct balance of simplicity, cost-efficiency and resilience, along with seamless intergeattion into AWS ecosystem.
+
 ## Project Overview
 
 This project demonstrates a full cloud deployment of **Umami** on AWS using **Terraform, Docker, and ECS Fargate**, with a cost-optimized setup for demos:
