@@ -1,4 +1,4 @@
-# ECS Project: Umami App
+# ECS Project: Umami - Web Analytics App
 
 A fully containerised analytics application deployed on AWS using modern infrastructure-as-code, CI/CD pipelines, and container orchestration. This project demonstrates a cost-optimised setup for running **Umami**, an open-source web 
 analytics platform, leveraging AWS ECS Fargate, Terraform, and Docker.
