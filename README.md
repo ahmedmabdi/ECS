@@ -58,7 +58,7 @@ To make this project production-ready, the following enhancements can be conside
 ![Umami Demo GIF](images-recordings/umami-demo.gif)  
 
 ---
-## Troubleshooting: Database Connection Error  
+## Debugging: Database Connection Error  
 
 During initial deployment, the ECS task logs showed the following error when the application could not connect to the Postgres database:  
 
@@ -69,7 +69,7 @@ umami
 01 September 2025 at 08:32
 ✓ DATABASE_URL is defined.**
 
-After revisiting the RDS resource several times, I discovered that the identifier variable was set using var.db_name
+After revisiting the RDS resource several times, I discovered that the identifier variable was set using var.db_name.
 - identifier            = var.db_name
 
 This created the RDS instance but did not create a database named umami within it. To resolve the issue, a separate variable was introduced to distinguish between the identifier (instance name) and db_name (PostgreSQL database name).
