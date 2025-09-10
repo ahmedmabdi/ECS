@@ -20,7 +20,7 @@ This project demonstrates a full cloud deployment of **Umami** on AWS using **Te
 
 ---
 ## Architecture Diagram
-![Architecture Diagram](images-recordings/arch-umami-diagram.png)  
+![Architecture Diagram](images-recordings/diagram.png)  
 The architecture consists of the following key components:
 
 - **VPC** with public and private subnets across 2 AZ's
