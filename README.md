@@ -70,10 +70,10 @@ umami
 ✓ DATABASE_URL is defined.**
 
 After revisiting the RDS resource several times, I discovered that the identifier variable was set using var.db_name
-identifier            = var.db_name
+- identifier            = var.db_name
 This created the RDS instance but did not create a database named umami within it. To resolve the issue, a separate variable was introduced to distinguish between the identifier (instance name) and db_name (PostgreSQL database name).
-identifier               = var.db_identifier  
-db_name                 = var.db_name
+- identifier               = var.db_identifier  
+- db_name                 = var.db_name
 Once corrected, the database was successfully created, enabling the ECS service to connect and the backend to be fully operational.
 
 
