@@ -2,8 +2,11 @@ name: Build, Scan & Push Docker Image
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'app/**'          
+  pull_request:
+    paths:
+      - 'app/**'
 
 env:
   AWS_REGION: ${{ secrets.REGION }}
